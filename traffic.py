@@ -1,8 +1,9 @@
 from ultralytics import YOLO
 import cv2
 
-# Load YOLOv8 model (use 'yolov8n' for the small model, or 'yolov8s', 'yolov8m', etc. for others)
-model = YOLO("yolov8n.pt")
+# Load YOLOv11 model (ensure you have the correct model file)
+model = YOLO("yolo11n.pt")  # Change to the correct model file name
+conf_threshold = 0.4
 
 video_path = "test.mp4"
 cap = cv2.VideoCapture(video_path)
@@ -16,8 +17,7 @@ while True:
         break  # End of video
 
     # Perform vehicle detection (e.g., on each frame)
-    results = model(frame)
-
+    results = model(frame, conf=conf_threshold)
     # Filter the results to detect vehicles (class ID 2 corresponds to 'car' in COCO dataset)
     vehicles = [result for result in results[0].boxes.cls if result in [
         2, 3, 5, 7]]  # 2: Car, 3: Motorcycle, 5: Bus, 7: Truck
