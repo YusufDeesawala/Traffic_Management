@@ -1,5 +1,0 @@
-tensorflow
-opencv-python
-matplotlib
-numpy
-tensorflow-addons
